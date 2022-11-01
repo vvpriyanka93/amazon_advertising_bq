@@ -1,32 +1,39 @@
 # Amazon Data Modelling
-This  package models the Amazon API data coming from the [Daton's connector] (https://daton.sarasanalytics.com/) by combining the data from different brands and de duplicating the existing data.
+This DBT package models the Amazon API data coming from [Daton](https://sarasanalytics.com/daton/). Daton is the Unified Data Platform for Global Commerce with 100+ Pre-built connectors and data sets designed for commerce devloped by [Saras Analytics](https://sarasanalytics.com).
 
 This package would be performing the following funtions:
 
-Adds descriptions to tables and columns that are synced using Daton
-Models staging tables, which can be used directly as source for your BI tools/ Reports.
+- Consolidates the data from different brands and de duplicates and standardizes the data coming from Amazon.
+- Adds descriptions to tables and columns that are synced using Daton
+- Currency Conversion to ensure all the data is available at same currency level
+- Models staging tables, which can be used directly as source for your BI tools/ Reports.
 
 # Installation & Configuration
 
-## Install From GitHub
+## Installation Instructions
+Check [dbt Hub](https://hub.getdbt.com/) for the latest installation instructions, or [read the dbt docs](https://docs.getdbt.com/docs/package-management) for more information on installing packages.
 
-Add the following to your `packages.yml` file:
+Include in your `packages.yml`
 
-```
+```yaml
 packages:
-  - git: "https://github.com/Saras/dbt_amazon.git"
-    revision: 1.0.0
+  - package: daton/amazon_source
+    version: [">=0.1.0", "<0.3.0"]
 ```
 
-## Install From Local Directory
+## Models
 
-1. Clone this repository to a folder in the same parent directory as your DBT project
-2. Update your project's `packages.yml` to include a reference to this package:
+This package contains transformation models from the Amazon API which includes Sponsored Brands, Products, Display and Selling Partner APIs. The primary outputs of this package are described below.
 
-```
-packages:
-  - local: ../dbt_amazon
-```
+| **model**                 | **description**                                                                                                    |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| [FlatFileAllOrdersReportByLastUpdate](https://github.com/daton/dbt_amazon/blob/main/models/FlatFileAllOrdersReportByLastUpdate.sql)  | Table provides order level data |
+| [FBAAmazonFulfilledShipmentsReport](https://github.com/daton/dbt_amazon/blob/main/models/FBAAmazonFulfilledShipmentsReport.sql)        | Table provides shipment level data.            |
+| [stg_flatfileallorders](https://github.com/daton/dbt_amazon/blob/main/models/stg_flatfileallorders.sql)           | Each record represents an order, with additional dimensions like currency.           |  
+
+
+# Configuration 
+
 ## Required Variables
 
 This package assumes that you have an existing DBT project with a BigQuery profile connected & tested. Source data is located using the following variables which must be set in your `dbt_project.yml` file.
@@ -40,7 +47,7 @@ vars:
 ## Optional Variables
 ### Table Exclusions
 
-Setting these table exclusions will remove the modelling enabled for these tables. By default, these tables are tagged True. 
+Setting these table exclusions will remove the modelling enabled for the below tables. By default, these tables are tagged True. 
 
 ```
 vars:
@@ -60,7 +67,7 @@ vars:
 ## Resources:
 - Provide [feedback](XXXXX) on our existing dbt packages or what you'd like to see next
 - Have questions, feedback, or need help? Book a time during our office hours [using Calendly](xxxx) or email us at xxxx@daton.com
-- Learn more about Daton [in our docs](XXX)
+- Learn more about Daton [here](https://sarasanalytics.com/daton/)
 - Learn more about dbt [in the dbt docs](https://docs.getdbt.com/docs/introduction)
 - Check out [Discourse](https://discourse.getdbt.com/) for commonly asked questions and answers
 - Join the [chat](http://slack.getdbt.com/) on Slack for live discussions and support
