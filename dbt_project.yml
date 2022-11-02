@@ -38,4 +38,4 @@ models:
 #vars:
 #    project: 'daton-210514'
 #    dataset: 'AmericanaConsolidated'
-#    sp_flatfilev2settlement: true  # true by default
+#    FBAAmazonFulfilledShipmentsReport: true  # true by default
