@@ -7,7 +7,6 @@
     cluster_by = ['sku','amazon_order_id'],
     unique_key = ['purchase_date', 'sku', 'amazon_order_id'])}}
 
--- depends_on: {{ ref('ExchangeRates') }}
 
 {% if is_incremental() %}
 {%- set max_loaded_query -%}
