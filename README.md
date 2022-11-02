@@ -29,7 +29,7 @@ This package contains transformation models from the Amazon API which includes S
 | ------------------------- | ------------------------------------------------------------------------------------------------------------------ |
 | [FlatFileAllOrdersReportByLastUpdate](https://github.com/daton/dbt_amazon/blob/main/models/FlatFileAllOrdersReportByLastUpdate.sql)  | Table provides order level data |
 | [FBAAmazonFulfilledShipmentsReport](https://github.com/daton/dbt_amazon/blob/main/models/FBAAmazonFulfilledShipmentsReport.sql)        | Table provides shipment level data.            |
-| [stg_flatfileallorders](https://github.com/daton/dbt_amazon/blob/main/models/stg_flatfileallorders.sql)           | Each record represents an order, with additional dimensions like currency.           |  
+
 
 
 # Configuration 
