@@ -70,13 +70,11 @@ where lower(table_name) like '%flatfileordersbylastupdate%'
         gift_wrap_tax, 
         item_promotion_discount, 
         ship_promotion_discount,
-        address_type,
         ship_city, 
         ship_state, 
         ship_postal_code, 
         ship_country,  
         promotion_ids,
-        item_extensions_data,
         is_business_order,
         purchase_order_number,
         price_designation,
@@ -84,7 +82,7 @@ where lower(table_name) like '%flatfileordersbylastupdate%'
         _daton_user_id, 
         _daton_batch_runtime, 
         _daton_batch_id, 
-        ROW_NUMBER() OVER (PARTITION BY DATE(purchase_date), asin, sku, amazon_order_id order by a._daton_batch_runtime desc, a.last_updated_date desc) row_num
+        ROW_NUMBER() OVER (PARTITION BY DATE(purchase_date), asin, sku, amazon_order_id order by _daton_batch_runtime desc, last_updated_date desc) row_num
         from {{i}} 
             
             {% if is_incremental() %}
