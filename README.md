@@ -1,36 +1,40 @@
 # Amazon Data Modelling
-This DBT package models the Amazon API data coming from [Daton](https://sarasanalytics.com/daton/). Daton is the Unified Data Platform for Global Commerce with 100+ Pre-built connectors and data sets designed for commerce devloped by [Saras Analytics](https://sarasanalytics.com).
+This DBT package models the Amazon Adverstising data coming from [Daton](https://sarasanalytics.com/daton/). [Daton](https://sarasanalytics.com/daton/) is the Unified Data Platform for Global Commerce with 100+ pre-built connectors and data sets designed for accelerating the eCommerce data and analytics journey by [Saras Analytics](https://sarasanalytics.com).
 
 This package would be performing the following funtions:
 
-- Consolidates the data from different brands and de duplicates and standardizes the data coming from Amazon.
+- Consolidates and de duplicates the advertising data coming from Amazon Ads API.
 - Adds descriptions to tables and columns that are synced using Daton
 - Currency Conversion to ensure all the data is available at same currency level
-- Models staging tables, which can be used directly as source for your BI tools/ Reports.
+- Time Zone Conversion
 
 # Installation & Configuration
 
 ## Installation Instructions
-Check [dbt Hub](https://hub.getdbt.com/) for the latest installation instructions, or [read the dbt docs](https://docs.getdbt.com/docs/package-management) for more information on installing packages.
 
-Include in your `packages.yml`
+If you haven't already, you will need to create a packages.yml file in your project. Include this in your `packages.yml` file
 
 ```yaml
 packages:
-  - package: daton/amazon_source
+  - package: daton/amazon_adverstising_bq
     version: [">=0.1.0", "<0.3.0"]
 ```
 
 ## Models
 
-This package contains transformation models from the Amazon API which includes Sponsored Brands, Products, Display and Selling Partner APIs. The primary outputs of this package are described below.
+This package contains models from the Amazon API which includes Sponsored Brands, Products, Display. The primary outputs of this package are described below.
 
-| **model**                 | **description**                                                                                                    |
-| ------------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| [FlatFileAllOrdersReportByLastUpdate](https://github.com/daton/dbt_amazon/blob/main/models/FlatFileAllOrdersReportByLastUpdate.sql)  | Table provides order level data |
-| [FBAAmazonFulfilledShipmentsReport](https://github.com/daton/dbt_amazon/blob/main/models/FBAAmazonFulfilledShipmentsReport.sql)        | Table provides shipment level data.            |
-
-
+| **Category**                 | **Model**  | **Description** |
+| ------------------------- | ---------------| ----------------------- |
+|Sponsored Brands | [SponsoredBrands_AdGroupsReport](https://github.com/daton/amazon_advertising/blob/main/models/SponsoredBrands_AdGroupsReport.sql)  | A list of ad groups associated with the account |
+|Sponsored Brands | [SponsoredBrands_AdGroupsVideoReport](https://github.com/daton/amazon_advertising/blob/main/models/SponsoredBrands_AdGroupsVideoReport.sql)| A list of ad groups related to sponsored brand video associated with the account |
+|Sponsored Brands | [SponsoredBrands_PlacementCampaignsReport](https://github.com/daton/amazon_advertising/blob/main/models/SponsoredBrands_PlacementCampaignsReport.sql)| A list of all the placement campaigns associated with the account |
+|Sponsored Brands | [SponsoredBrands_SearchTermKeywordsReport](https://github.com/daton/amazon_advertising/blob/main/models/SponsoredBrands_SearchTermKeywordsReport.sql)| A list of product search keywords report |
+|Sponsored Brands | [SponsoredBrands_SearchTermKeywordsVideoReport](https://github.com/daton/amazon_advertising/blob/main/models/SponsoredBrands_SearchTermKeywordsVideoReport.sql)| A list of keywords associated with sponsored brand video |
+|Sponsored Display | [SponsoredDisplay_ProductAdsReport](https://github.com/daton/amazon_advertising/blob/main/models/SponsoredDisplay_ProductAdsReport.sql)| A list of product ads associated with the account |
+|Sponsored Products | [SponsoredProducts_PlacementCampaignsReport](https://github.com/daton/amazon_advertising/blob/main/models/SponsoredProducts_PlacementCampaignsReport.sql)| A list of all the placement campaigns associated with the account |
+|Sponsored Products | [SponsoredProducts_ProductAdsReport](https://github.com/daton/amazon_advertising/blob/main/models/SponsoredProducts_ProductAdsReport.sql)| A list of product ads associated with the account |
+|Sponsored Products | [SponsoredProducts_SearchTermKeywordReport](https://github.com/daton/amazon_advertising/blob/main/models/SponsoredProducts_SearchTermKeywordReport.sql)| A list of product search keywords report |
 
 # Configuration 
 
@@ -65,11 +69,5 @@ vars:
 ```
 
 ## Resources:
-- Provide [feedback](XXXXX) on our existing dbt packages or what you'd like to see next
-- Have questions, feedback, or need help? Book a time during our office hours [using Calendly](xxxx) or email us at xxxx@daton.com
-- Learn more about Daton [here](https://sarasanalytics.com/daton/)
-- Learn more about dbt [in the dbt docs](https://docs.getdbt.com/docs/introduction)
-- Check out [Discourse](https://discourse.getdbt.com/) for commonly asked questions and answers
-- Join the [chat](http://slack.getdbt.com/) on Slack for live discussions and support
-- Find [dbt events](https://events.getdbt.com) near you
-- Check out [the dbt blog](https://blog.getdbt.com/) for the latest news on dbt's development and best practices
+- Have questions, feedback, or need [help](https://meetings.hubspot.com/balaji-kolli/)? Schedule a call with our data experts or email us at info@sarasanalytics.com.
+- Learn more about Daton [here]().
